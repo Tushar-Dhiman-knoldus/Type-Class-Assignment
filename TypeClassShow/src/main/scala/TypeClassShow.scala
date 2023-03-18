@@ -1,5 +1,7 @@
 package com.knoldus.typeclassshow
 
+import scala.util.Try
+
 trait Show[A] {
   def show(a: A): String
 }
@@ -19,7 +21,7 @@ object TypeClassShow {
   // Implementation of Position class type
   case class Position(num1: Int, num2: Int) {
     val positionShow: Show[Position] = new Show[Position] {
-      override def show(position: Position): String = s"Pos(x: ${position.num1}, y: ${position.num2})"
+      override def show(position: Position): String = Try(s"Pos(x: ${position.num1}, y: ${position.num2})").getOrElse("Invalid Position")
     }
   }
 }
